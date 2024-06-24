@@ -1,0 +1,396 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Inputs and Buttons</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Container */
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Input Group */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 220px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Button Group */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+
+        .button-group button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="input-group">
+            <label for="input1">First Name</label>
+            <input type="text" id="fname" placeholder="Enter text">
+        </div>
+        <div class="input-group">
+            <label for="input2">Last Name</label>
+            <input type="text" id="lname" placeholder="Enter text">
+        </div>
+        <div class="input-group">
+            <label for="input3">Age</label>
+            <input type="text" id="age" placeholder="Enter text">
+        </div>
+        <div class="input-group">
+            <label for="input4">Country</label>
+            <input type="text" id="country" placeholder="Enter text">
+        </div>
+        <div class="button-group">
+            <button id ="create">create</button>
+            <button id ="retrieve">retrieve</button>
+            <button id ="update">update</button>
+            <button id ="delete">delete</button>
+        </div>
+    </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyC6BULy-AeZQedZdOQgeEK-YXeVTmW62y0",
+          authDomain: "test1-78f15.firebaseapp.com",
+          projectId: "test1-78f15",
+          storageBucket: "test1-78f15.appspot.com",
+          messagingSenderId: "870346411870",
+          appId: "1:870346411870:web:1c15dc2fd58b35a24a09cf",
+          measurementId: "G-EZK6B5M2DD"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        import{getDatabase,ref,child,get,set,update,remove}  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"
+     const db = getDatabase();
+     let fname = document.getElementById("fname");
+     let lname = document.getElementById("lname");
+     let age = document.getElementById("age");
+     let country = document.getElementById("country");
+
+     let addbtn = document.getElementById("create");
+     let readbtn = document.getElementById("retrieve");
+     let updatebtn = document.getElementById("update");
+     let delbtn = document.getElementById("delete");
+
+     function adddata (){
+          set(ref(db,'EmployeeSet/'+CnicInp.value),{
+             name:{firstname:fname.value , lastname: lname.value },
+             age : age.value,
+             country:country.value
+
+          }) .then(()=>{
+            alert("data added");
+          })
+     }
+     function retdata(){
+        const dbref=ref(db);
+        get(child(dbref,'EmployeeSet/'+CnicInp.value)).then((snapshot)=>{
+
+            if(snapshot.exists()){
+                fname.value=snapshot.val().name.firstname;
+                lname.value=snapshot.val().name.lastname;
+                age.value=snapshot.val().age; 
+                country.value=snapshot.val().country;
+            }
+            else {
+                alert("SOMETHING WENT WRONG");
+            }
+        })
+     }
+
+     function updatedata (){
+          update(ref(db,'EmployeeSet/'+CnicInp.value),{
+             name:{firstname:fname.value , lastname: lname.value },
+             age : age.value,
+             country:country.value
+
+          }) .
+          then(()=>{
+            alert("data updated");
+          })
+     }
+
+     function deletedata (){
+          remove(ref(db,'EmployeeSet/'+CnicInp.value))
+           
+          .then(()=>{
+            alert("data deleted");
+          })
+     }
+
+     addbtn.addEventListener('click',adddata);
+     readbtn.addEventListener('click',retdata);
+     updatebtn.addEventListener('click',updatedata);
+     delbtn.addEventListener('click',deletedata);
+
+
+      </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Inputs and Buttons</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Container */
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Input Group */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 220px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Button Group */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+
+        .button-group button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="input-group">
+            <label for="id">ID</label>
+            <input type="text" id="IDD" placeholder="Enter text">
+        </div>
+        <div class="input-group">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" placeholder="Enter text">
+        </div>
+        <div class="input-group">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" placeholder="Enter text">
+        </div>
+        <div class="input-group">
+            <label for="age">Age</label>
+            <input type="text" id="age" placeholder="Enter text">
+        </div>
+        <div class="input-group">
+            <label for="country">Country</label>
+            <input type="text" id="country" placeholder="Enter text">
+        </div>
+        <div class="button-group">
+            <button id="create">Create</button>
+            <button id="retrieve">Retrieve</button>
+            <button id="update">Update</button>
+            <button id="delete">Delete</button>
+            <button id="clear">Clear</button> 
+        </div>
+    </div>
+    <script type="module">
+       // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyCokwbrNs5OvAUQ2qWTncSebxuZ8mz_tCk",
+    authDomain: "test2-a7f8a.firebaseapp.com",
+    databaseURL: "https://test2-a7f8a-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "test2-a7f8a",
+    storageBucket: "test2-a7f8a.appspot.com",
+    messagingSenderId: "544013077427",
+    appId: "1:544013077427:web:2735080d675b18226a99c6",
+    measurementId: "G-TZ3218PZ9C"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  import { getDatabase, ref, child, get, set, update, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+        
+        const db = getDatabase();
+
+        const fname = document.getElementById("fname");
+        const lname = document.getElementById("lname");
+        const age = document.getElementById("age");
+        const country = document.getElementById("country");
+        const idd =document.getElementById("IDD");
+
+        const addbtn = document.getElementById("create");
+        const readbtn = document.getElementById("retrieve");
+        const updatebtn = document.getElementById("update");
+        const delbtn = document.getElementById("delete");
+        const clearbtn = document.getElementById("clear");
+        
+
+        function adddata() {
+            set(ref(db, 'OCAStudents/' + idd.value), {
+                firstname: fname.value, 
+                lastname: lname.value,
+                age: age.value,
+                country: country.value,
+                id : Number(idd.value)
+            }).then(() => {
+                alert("Data added");
+            }).catch((error) => {
+                alert("Error: " + error);
+            });
+        }
+
+        function retdata() {
+            const dbref = ref(db);
+            get(child(dbref, 'OCAStudents/' + idd.value)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    fname.value = snapshot.val().firstname;
+                    lname.value = snapshot.val().lastname;
+                    age.value = snapshot.val().age;
+                    country.value = snapshot.val().country;
+                } else {
+                    alert("No data found");
+                }
+            }).catch((error) => {
+                alert("Error: " + error);
+            });
+        }
+
+        function updatedata() {
+            update(ref(db, 'OCAStudents/' + idd.value), {
+                firstname: fname.value,
+                lastname: lname.value ,
+                age: age.value,
+                country: country.value
+            }).then(() => {
+                alert("Data updated");
+            }).catch((error) => {
+                alert("Error: " + error);
+            });
+        }
+
+        function deletedata() {
+            remove(ref(db, 'OCAStudents/' +  idd.value)).then(() => {
+                alert("Data deleted");
+            }).catch((error) => {
+                alert("Error: " + error);
+            });
+        }
+
+
+        function clearFields() {
+            fname.value = "";
+            lname.value = "";
+            age.value = "";
+            country.value = "";
+            idd.value = "";
+        }
+
+        addbtn.addEventListener('click', adddata);
+        readbtn.addEventListener('click', retdata);
+        updatebtn.addEventListener('click', updatedata);
+        delbtn.addEventListener('click', deletedata);
+        clearbtn.addEventListener('click',clearFields);
+    </script>
+</body>
+</html>
